@@ -1,0 +1,38 @@
+---
+- name: apt-get install software-properties-common
+  command: sudo apt-get install software-properties-common -y -q
+
+- name: apt-add-repository ppa:brightbox/ruby-ng
+  command: sudo apt-add-repository ppa:brightbox/ruby-ng -y
+
+- name: apt-get update
+  command: sudo apt-get update
+
+- name: Install Ruby
+  apt: >
+    pkg={{ ruby_version }}
+    update_cache=yes
+    cache_valid_time=3600
+    state=latest
+    force=yes
+  tags: ruby
+
+- name: gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+  command: gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+
+- name: Gem install bundler
+  gem: >
+    name=bundler
+    user_install=no
+    state=latest
+  tags: ruby
+
+- name: apt-get install libsqlite3-dev ruby-dev zlib1g-dev
+  command: sudo apt-get install libsqlite3-dev ruby-dev zlib1g-dev -y -q
+
+- name: Gem install rails
+  gem: >
+    name=rails
+    user_install=no
+    state=latest
+  tags: ruby

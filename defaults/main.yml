@@ -1,0 +1,5 @@
+---
+# defaults file for rails-ruby
+ruby_version: ruby2.3
+ruby_repo_install: 'deb [arch=amd64] http://apt.hellobits.com/ xenial main'
+ruby_url: http://apt.hellobits.com/hellobits.key
